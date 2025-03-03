@@ -171,7 +171,6 @@ class AnimePahe extends AnimeParser {
       const { data } = await this.client.get(`${this.baseUrl}/play/${episodeId}`, {
         headers: this.Headers(episodeId.split('/')[0]),
       });
-      console.log(data);
       const $ = load(data);
 
       const links = $('div#resolutionMenu > button').map((i, el) => ({

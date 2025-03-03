@@ -142,7 +142,6 @@ class AnimePahe extends models_1.AnimeParser {
                 const { data } = await this.client.get(`${this.baseUrl}/play/${episodeId}`, {
                     headers: this.Headers(episodeId.split('/')[0]),
                 });
-                console.log(data);
                 const $ = (0, cheerio_1.load)(data);
                 const links = $('div#resolutionMenu > button').map((i, el) => ({
                     url: $(el).attr('data-src'),
