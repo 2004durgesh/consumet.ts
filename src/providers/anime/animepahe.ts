@@ -171,7 +171,7 @@ class AnimePahe extends AnimeParser {
       const { data } = await this.client.get(`${this.baseUrl}/play/${episodeId}`, {
         headers: this.Headers(episodeId.split('/')[0]),
       });
-
+      console.log(data);
       const $ = load(data);
 
       const links = $('div#resolutionMenu > button').map((i, el) => ({
@@ -195,6 +195,7 @@ class AnimePahe extends AnimeParser {
 
       return iSource;
     } catch (err) {
+      console.log(err);
       throw new Error((err as Error).message);
     }
   };
@@ -251,12 +252,12 @@ class AnimePahe extends AnimeParser {
 
 export default AnimePahe;
 
-// (async () => {
-//   const animepahe = new AnimePahe();
+(async () => {
+  const animepahe = new AnimePahe();
 
-//   const anime = await animepahe.search('Classroom of the elite');
-//   const info = await animepahe.fetchAnimeInfo(anime.results[0].id);
-//   // console.log(info);
-//   const sources = await animepahe.fetchEpisodeSources(info.episodes![0].id);
-//   console.log(sources);
-// })();
+  const anime = await animepahe.search('Classroom of the elite');
+  const info = await animepahe.fetchAnimeInfo(anime.results[0].id);
+  // console.log(info);
+  const sources = await animepahe.fetchEpisodeSources(info.episodes![0].id);
+  console.log(sources);
+})();

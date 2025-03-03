@@ -142,6 +142,7 @@ class AnimePahe extends models_1.AnimeParser {
                 const { data } = await this.client.get(`${this.baseUrl}/play/${episodeId}`, {
                     headers: this.Headers(episodeId.split('/')[0]),
                 });
+                console.log(data);
                 const $ = (0, cheerio_1.load)(data);
                 const links = $('div#resolutionMenu > button').map((i, el) => ({
                     url: $(el).attr('data-src'),
@@ -163,6 +164,7 @@ class AnimePahe extends models_1.AnimeParser {
                 return iSource;
             }
             catch (err) {
+                console.log(err);
                 throw new Error(err.message);
             }
         };
@@ -208,12 +210,12 @@ class AnimePahe extends models_1.AnimeParser {
     }
 }
 exports.default = AnimePahe;
-// (async () => {
-//   const animepahe = new AnimePahe();
-//   const anime = await animepahe.search('Classroom of the elite');
-//   const info = await animepahe.fetchAnimeInfo(anime.results[0].id);
-//   // console.log(info);
-//   const sources = await animepahe.fetchEpisodeSources(info.episodes![0].id);
-//   console.log(sources);
-// })();
+(async () => {
+    const animepahe = new AnimePahe();
+    const anime = await animepahe.search('Classroom of the elite');
+    const info = await animepahe.fetchAnimeInfo(anime.results[0].id);
+    // console.log(info);
+    const sources = await animepahe.fetchEpisodeSources(info.episodes[0].id);
+    console.log(sources);
+})();
 //# sourceMappingURL=animepahe.js.map
