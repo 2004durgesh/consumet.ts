@@ -28,7 +28,7 @@ class Kwik extends VideoExtractor {
           'user-agent': USER_AGENT,
         },
       });
-
+      console.log(data);
       const source = eval(/(eval)(\(f.*?)(\n<\/script>)/s.exec(data)![2].replace('eval', '')).match(
         /https.*?m3u8/
       );
@@ -39,7 +39,6 @@ class Kwik extends VideoExtractor {
 
       return this.sources;
     } catch (err) {
-      console.log('kwik', err);
       throw new Error((err as Error).message);
     }
   };
