@@ -1,4 +1,5 @@
 import { VideoExtractor, IVideo } from '../models';
+import { USER_AGENT } from '../utils';
 
 class Kwik extends VideoExtractor {
   protected override serverName = 'kwik';
@@ -9,7 +10,22 @@ class Kwik extends VideoExtractor {
   override extract = async (videoUrl: URL): Promise<IVideo[]> => {
     try {
       const { data } = await this.client.get(`${videoUrl.href}`, {
-        headers: { Referer: this.host },
+        headers: {
+          authority: 'animepahe.ru',
+          accept: 'application/json, text/javascript, */*; q=0.01',
+          'accept-language': 'en-US,en;q=0.9',
+          cookie: '__ddg2_=;',
+          dnt: '1',
+          'sec-ch-ua': '"Not A(Brand";v="99", "Microsoft Edge";v="121", "Chromium";v="121"',
+          'sec-ch-ua-mobile': '?0',
+          'sec-ch-ua-platform': '"Windows"',
+          'sec-fetch-dest': 'empty',
+          'sec-fetch-mode': 'cors',
+          'sec-fetch-site': 'same-origin',
+          'x-requested-with': 'XMLHttpRequest',
+          referer: `${this.host}`,
+          'user-agent': USER_AGENT,
+        },
       });
 
       const source = eval(/(eval)(\(f.*?)(\n<\/script>)/s.exec(data)![2].replace('eval', '')).match(
