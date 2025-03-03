@@ -8,7 +8,7 @@ class Kwik extends models_1.VideoExtractor {
         this.serverName = 'kwik';
         this.sources = [];
         this.host = 'https://animepahe.ru';
-        this.extract = async (videoUrl) => {
+        this.extract = async (videoUrl, sessionId) => {
             try {
                 const { data } = await this.client.get(`${videoUrl.href}`, {
                     headers: {
@@ -24,7 +24,7 @@ class Kwik extends models_1.VideoExtractor {
                         'sec-fetch-mode': 'cors',
                         'sec-fetch-site': 'same-origin',
                         'x-requested-with': 'XMLHttpRequest',
-                        referer: `${this.host}`,
+                        referer: `${this.host}/anime/${sessionId}`,
                         'user-agent': utils_1.USER_AGENT,
                     },
                 });

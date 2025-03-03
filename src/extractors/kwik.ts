@@ -7,7 +7,7 @@ class Kwik extends VideoExtractor {
 
   private readonly host = 'https://animepahe.ru';
 
-  override extract = async (videoUrl: URL): Promise<IVideo[]> => {
+  override extract = async (videoUrl: URL, sessionId: string): Promise<IVideo[]> => {
     try {
       const { data } = await this.client.get(`${videoUrl.href}`, {
         headers: {
@@ -23,7 +23,7 @@ class Kwik extends VideoExtractor {
           'sec-fetch-mode': 'cors',
           'sec-fetch-site': 'same-origin',
           'x-requested-with': 'XMLHttpRequest',
-          referer: `${this.host}`,
+          referer: `${this.host}/anime/${sessionId}`,
           'user-agent': USER_AGENT,
         },
       });
