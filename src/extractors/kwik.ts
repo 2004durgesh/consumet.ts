@@ -4,7 +4,7 @@ class Kwik extends VideoExtractor {
   protected override serverName = 'kwik';
   protected override sources: IVideo[] = [];
 
-  private readonly host = 'https://animepahe.com';
+  private readonly host = 'https://animepahe.ru';
 
   override extract = async (videoUrl: URL): Promise<IVideo[]> => {
     try {
@@ -22,6 +22,7 @@ class Kwik extends VideoExtractor {
 
       return this.sources;
     } catch (err) {
+      console.log('kwik', err);
       throw new Error((err as Error).message);
     }
   };
