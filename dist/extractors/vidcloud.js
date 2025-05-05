@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+// @ts-nocheck
 const models_1 = require("../models");
 const utils_1 = require("../utils");
 const megacloud_getsrcs_1 = require("./megacloud/megacloud.getsrcs");

@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+// @ts-nocheck
 const models_1 = require("../../models");
 const megacloud_getsrcs_1 = require("./megacloud.getsrcs");
 class MegaCloud extends models_1.VideoExtractor {

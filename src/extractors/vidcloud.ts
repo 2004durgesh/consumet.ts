@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { VideoExtractor, IVideo, ISubtitle, Intro } from '../models';
 import { USER_AGENT } from '../utils';
 import { getSources } from './megacloud/megacloud.getsrcs';

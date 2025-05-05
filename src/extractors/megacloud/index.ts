@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ISource, IVideo, VideoExtractor } from '../../models';
 import { getSources } from './megacloud.getsrcs';
 
@@ -19,11 +20,9 @@ class MegaCloud extends VideoExtractor {
         },
         sources: [],
       };
-
       const resp = await getSources(embedIframeURL.href, referer);
 
       if (!resp) return extractedData;
-
       if (Array.isArray(resp.sources)) {
         extractedData.sources = resp.sources.map((s: { file: any; type: string }) => ({
           url: s.file,

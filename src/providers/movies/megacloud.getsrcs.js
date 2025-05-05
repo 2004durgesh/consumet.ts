@@ -1,17 +1,10 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.getSources = getSources;
-// @ts-nocheck
 // solution inspired from https://github.com/drblgn/rabbit_wasm/blob/main/rabbit.ts
 // solution inspired from https://github.com/shimizudev/consumet.ts/blob/master/dist/extractors/megacloud/megacloud.getsrcs.js
-const megacloud_decodedpng_1 = require("./megacloud.decodedpng");
-const crypto_js_1 = __importDefault(require("crypto-js"));
-const utils_1 = require("../../utils/utils");
-const user_agent = utils_1.USER_AGENT;
+import CryptoJS from "crypto-js";
+import {decoded_png} from "./megacloud.decodedpng.js";
 const referrer = 'https://himovies.sx';
+
 let wasm;
 let arr = new Array(128).fill(void 0);
 let dateNow = Date.now();
@@ -21,11 +14,10 @@ function isDetached(buffer) {
         try {
             new Uint8Array(ab);
             return false;
-        }
-        catch (_b) {
+         } catch {
             // Uint8Array throws if using a detached buffer
             return true;
-        }
+         }
     }
     return false;
 }
@@ -36,7 +28,7 @@ const meta = {
 const image_data = {
     height: 50,
     width: 65,
-    data: megacloud_decodedpng_1.decoded_png,
+    data: decoded_png,
 };
 const canvas = {
     baseUrl: 'https://megacloud.tv/embed-2/e-1/1hnXq7VzX0Ex?k=1',
@@ -662,8 +654,8 @@ const i = (a, P) => {
 };
 const M = (a, P) => {
     try {
-        var Q0 = crypto_js_1.default.AES.decrypt(a, P);
-        return JSON.parse(Q0.toString(crypto_js_1.default.enc.Utf8));
+        var Q0 = CryptoJS.AES.decrypt(a, P);
+        return JSON.parse(Q0.toString(CryptoJS.enc.Utf8));
     }
     catch (Q1) {
         // @ts-ignore
@@ -674,11 +666,10 @@ const M = (a, P) => {
 function z(a) {
     return [(a & 4278190080) >> 24, (a & 16711680) >> 16, (a & 65280) >> 8, a & 255];
 }
-async function getSources(embed_url, site) {
-    var _b;
+export async function getSources(embed_url) {
     console.log(embed_url);
     await getMeta(embed_url);
-    let xrax = (_b = embed_url.split('/').pop()) === null || _b === void 0 ? void 0 : _b.split('?').shift();
+    let xrax = embed_url.split('/').pop()?.split('?').shift();
     fake_window.xrax = xrax;
     fake_window.G = xrax;
     canvas.baseUrl = embed_url;
@@ -695,12 +686,12 @@ async function getSources(embed_url, site) {
             fake_window.localStorage.kid +
             '&b=' +
             browser_version;
-        console.log(getSourcesUrl);
+            console.log(getSourcesUrl);
         let resp_json = await (await fetch(getSourcesUrl, {
             headers: {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
                 //"Referrer": fake_window.origin + "/v2/embed-4/" + xrax + "?z=",
-                Referer: embed_url + xrax + '?k=1',
+                Referer: embed_url+xrax+"?k=1",
                 'X-Requested-With': 'XMLHttpRequest',
             },
             method: 'GET',
@@ -724,4 +715,3 @@ async function getSources(embed_url, site) {
         console.error(err);
     }
 }
-//# sourceMappingURL=megacloud.getsrcs.js.map

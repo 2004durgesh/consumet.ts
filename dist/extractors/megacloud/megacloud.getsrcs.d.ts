@@ -1,1 +1,1 @@
-export declare function getSources(embed_url: string, site: string): Promise<any>;
+export declare function getSources(embed_url: any, site: any): Promise<{} | undefined>;
