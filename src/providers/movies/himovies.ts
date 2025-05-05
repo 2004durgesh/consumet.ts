@@ -513,7 +513,7 @@ class HiMovies extends MovieParser {
 //   const search = await movie.search('jujutsu');
 //   const movieInfo = await movie.fetchMediaInfo(search.results[0].id);
 //   // const recentTv = await movie.fetchTrendingTvShows();
-//   const genre = await movie.fetchEpisodeSources(movieInfo.episodes![0].id, movieInfo.id,StreamingServers.VidCloud);
+//   const genre = await movie.fetchEpisodeSources(movieInfo.episodes![0].id, movieInfo.id);
 //   console.log(genre);
 // })();
 
